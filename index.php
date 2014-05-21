@@ -14,24 +14,34 @@ $raddress = $_SERVER['REMOTE_ADDR'];
 $addressPrefix = 'floodprotect';
 $mcachevarname = $addressPrefix.$raddress;
 
-if($mcache->get('$mcachevarname')) {
+if($mcache->get($mcachevarname)) {
        // echo "It was set";
 
-	$tmpSetVar = $mcache->get('$mcachevarname');
+	$tmpSetVar = $mcache->get($mcachevarname);
 	if ($tmpSetVar>$floodtimes) {
 		echo "Nope... TMI (too much information). Your request wont be processed! ";
+		$mcache->set($mcachevarname, $tmpSetVar , MEMCACHE_COMPRESSED, $floodsec);
 		// STOP THE PROCESS
 		die(); 
 	} else {
 
 	$tmpSetVar = $tmpSetVar + 1;
-	$mcache->set('$mcachevarname', $tmpSetVar , MEMCACHE_COMPRESSED, $floodsec);
-	echo $mcache->get('$mcachevarname');
+	$mcache->set($mcachevarname, $tmpSetVar , MEMCACHE_COMPRESSED, $floodsec);
+	//echo $mcache->get($mcachevarname);
+	echo "No flood detected. I'm processing the data!";
 	}
 
 } else {
- $mcache->set('$mcachevarname', '1', MEMCACHE_COMPRESSED, $floodsec);
+ $mcache->set($mcachevarname, '1', MEMCACHE_COMPRESSED, $floodsec);
+
+ echo "initial process for this IP address";
+
+
 }
+
+
+echo "<br>.<br>.<br>.<br>.<br>.<br> The real part of your program goes below .....";
+
 
 
 ?>
