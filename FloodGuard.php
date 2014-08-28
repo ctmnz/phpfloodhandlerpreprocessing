@@ -27,8 +27,8 @@ class FloodGuard
 	 * returns true or false
 	 *
 	 * @param  string  $sample the sample data
-	 * @return boolean   all of the exciting sample options
-	 * @access private
+	 * @return boolean true/false if the remote IP address has (false) or hasn't (true) reached the information flood limit
+	 * @access public 
 	 */
 	
 	private static $mcache;
@@ -38,7 +38,16 @@ class FloodGuard
 	private $addressPrefix = 'classfloodprotect';
 	private $mcachevarname;
 	
-	
+	/**
+	 * Constructor
+	 * 
+	 * The constructor of the FloodGuard Class
+	 * 
+	 * @param string $mcacheAddr	The address of the memcache server
+	 * @param int $mcachePort		The port of the memcache server
+	 * @param int $floodsec			The time limit 
+	 * @param int $floodtimes		The maximum user requests per $floodsec
+	 */
 	function __construct($mcacheAddr,$mcachePort,$floodsec,$floodtimes) {
 		$this->mcache = new Memcache();
 		$this->mcache->connect($mcacheAddr,$mcachePort);
