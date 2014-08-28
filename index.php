@@ -4,10 +4,6 @@
 /**
  * FloodGuard is a class that helps you to protect your web application from sh*ty information flood
  *
- * Example_Class is a class that has no real actual code, but merely
- * exists to help provide people with an understanding as to how the
- * various PHPDoc tags are used.
- *
  * Example usage:
  * $fg = new FloodGuard("localhost",11211,2,2);
  *
