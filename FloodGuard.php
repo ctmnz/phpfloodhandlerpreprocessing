@@ -12,7 +12,6 @@
  * } else {
  *	echo "no! you shall not pass!";
  * }
-
  *
  * @package  FloodGuard
  * @author   Daniel Stoinov <daniel.stoinov@gmail.com>
@@ -23,14 +22,7 @@
 
 class FloodGuard
 {
-	/**
-	 * returns true or false
-	 *
-	 * @param  string  $sample the sample data
-	 * @return boolean true/false if the remote IP address has (false) or hasn't (true) reached the information flood limit
-	 * @access public 
-	 */
-	
+
 	private static $mcache;
 	private $fsec;
 	private $ftimes;
@@ -63,7 +55,15 @@ class FloodGuard
 		$this->mcachevarname = $this->addressPrefix.$this->raddress;	
 		
 	}
-	
+
+	/**
+	 * returns true or false
+	 *
+	 * @param  string  $sample the sample data
+	 * @return boolean true/false if the remote IP address has (false) or hasn't (true) reached the information flood limit
+	 * @access public
+	 */
+		
 	public function checkPermissionToProceed()
 	{
 		if($this->mcache->get($this->mcachevarname)) {
